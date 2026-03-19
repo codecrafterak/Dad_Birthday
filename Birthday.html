@@ -1,0 +1,1207 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Happy 45th Birthday, Dad ❤️</title>
+
+  <!-- Google Fonts: Cormorant Garamond (display) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ============================================================
+       CSS VARIABLES & RESET
+    ============================================================ */
+    :root {
+      --bg:        #090e1a;
+      --bg2:       #0f172a;
+      --bg3:       #111827;
+      --gold:      #c9a96e;
+      --gold-lt:   #e8c97e;
+      --ivory:     #f5f0e8;
+      --muted:     #8899aa;
+      --glass-bg:  rgba(255,255,255,0.04);
+      --glass-bd:  rgba(255,255,255,0.08);
+      --shadow:    0 8px 40px rgba(0,0,0,0.6);
+      --r:         16px;
+      --trans:     0.4s cubic-bezier(0.22,1,0.36,1);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; font-size: 16px; }
+
+    body {
+      background: var(--bg);
+      color: var(--ivory);
+      font-family: 'DM Sans', sans-serif;
+      font-weight: 300;
+      overflow-x: hidden;
+      line-height: 1.7;
+    }
+
+    /* ============================================================
+       SCROLLBAR
+    ============================================================ */
+    ::-webkit-scrollbar { width: 4px; }
+    ::-webkit-scrollbar-track { background: var(--bg); }
+    ::-webkit-scrollbar-thumb { background: var(--gold); border-radius: 99px; }
+
+    /* ============================================================
+       UTILITY CLASSES
+    ============================================================ */
+    .gold   { color: var(--gold); }
+    .italic { font-style: italic; }
+    .center { text-align: center; }
+
+    /* Fade-in on scroll */
+    .reveal {
+      opacity: 0;
+      transform: translateY(40px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-left  { opacity:0; transform:translateX(-50px); transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-right { opacity:0; transform:translateX(50px);  transition: opacity 0.8s ease, transform 0.8s ease; }
+    .reveal-left.visible, .reveal-right.visible { opacity:1; transform:translateX(0); }
+
+    /* Section wrapper */
+    section { position: relative; }
+
+    /* Section title style */
+    .section-label {
+      font-family: 'DM Sans', sans-serif;
+      font-size: 0.7rem;
+      letter-spacing: 0.3em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 5vw, 3.4rem);
+      font-weight: 300;
+      line-height: 1.15;
+      color: var(--ivory);
+    }
+
+    /* Divider line */
+    .divider {
+      width: 60px;
+      height: 1px;
+      background: var(--gold);
+      margin: 24px auto;
+      opacity: 0.6;
+    }
+
+    /* ============================================================
+       MUSIC TOGGLE BUTTON (fixed)
+    ============================================================ */
+    #music-toggle {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      z-index: 1000;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      border: 1px solid var(--glass-bd);
+      background: var(--glass-bg);
+      backdrop-filter: blur(12px);
+      color: var(--gold);
+      font-size: 1.3rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+      box-shadow: var(--shadow);
+    }
+    #music-toggle:hover { background: rgba(201,169,110,0.15); transform: scale(1.1); }
+
+    /* ============================================================
+       1. HERO SECTION
+    ============================================================ */
+    #hero {
+      height: 100vh;
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 2rem;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated radial gradient background */
+    #hero::before {
+      content: '';
+      position: absolute; inset: 0;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 40%, rgba(201,169,110,0.12) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 40% at 20% 80%, rgba(59,130,246,0.07) 0%, transparent 60%),
+        radial-gradient(ellipse 60% 50% at 80% 20%, rgba(201,169,110,0.06) 0%, transparent 60%);
+      animation: heroGlow 8s ease-in-out infinite alternate;
+    }
+
+    @keyframes heroGlow {
+      0%   { opacity: 0.8; transform: scale(1); }
+      100% { opacity: 1;   transform: scale(1.05); }
+    }
+
+    /* Particle canvas */
+    #particle-canvas {
+      position: absolute; inset: 0;
+      pointer-events: none;
+    }
+
+    .hero-content { position: relative; z-index: 2; }
+
+    .hero-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      letter-spacing: 0.35em;
+      text-transform: uppercase;
+      color: var(--gold);
+      border: 1px solid rgba(201,169,110,0.3);
+      padding: 6px 18px;
+      border-radius: 99px;
+      margin-bottom: 2rem;
+      animation: fadeDown 1s ease 0.2s both;
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.8rem, 9vw, 7rem);
+      font-weight: 300;
+      line-height: 1.05;
+      letter-spacing: -0.01em;
+      color: var(--ivory);
+      animation: fadeDown 1s ease 0.5s both;
+    }
+    .hero-title span { color: var(--gold); font-style: italic; }
+
+    .hero-sub {
+      margin-top: 1.2rem;
+      font-size: clamp(0.9rem, 2vw, 1.1rem);
+      color: var(--muted);
+      font-weight: 300;
+      letter-spacing: 0.04em;
+      animation: fadeDown 1s ease 0.8s both;
+    }
+
+    .hero-year-ring {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.25);
+      display: flex; align-items: center; justify-content: center;
+      margin: 2.2rem auto 0;
+      animation: fadeDown 1s ease 1s both, ringPulse 3s ease-in-out 2s infinite;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.6rem;
+      font-weight: 300;
+      color: var(--gold);
+      position: relative;
+    }
+    .hero-year-ring::before {
+      content: '';
+      position: absolute; inset: -8px;
+      border-radius: 50%;
+      border: 1px solid rgba(201,169,110,0.08);
+    }
+
+    @keyframes ringPulse {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(201,169,110,0); }
+      50%       { box-shadow: 0 0 0 12px rgba(201,169,110,0.08); }
+    }
+
+    /* Scroll indicator */
+    .scroll-indicator {
+      position: absolute;
+      bottom: 36px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+      animation: fadeDown 1s ease 1.4s both;
+      cursor: pointer;
+      z-index: 2;
+    }
+    .scroll-indicator span {
+      font-size: 0.62rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+    .scroll-line {
+      width: 1px;
+      height: 44px;
+      background: linear-gradient(to bottom, var(--gold), transparent);
+      animation: scrollDrop 1.8s ease-in-out infinite;
+    }
+    @keyframes scrollDrop {
+      0%   { transform: scaleY(0); transform-origin: top; }
+      50%  { transform: scaleY(1); transform-origin: top; }
+      51%  { transform: scaleY(1); transform-origin: bottom; }
+      100% { transform: scaleY(0); transform-origin: bottom; }
+    }
+
+    @keyframes fadeDown {
+      from { opacity:0; transform:translateY(-20px); }
+      to   { opacity:1; transform:translateY(0); }
+    }
+
+    /* ============================================================
+       2. COUNTDOWN SECTION
+    ============================================================ */
+    #countdown {
+      padding: 80px 24px;
+      background: var(--bg2);
+      text-align: center;
+    }
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: clamp(12px, 3vw, 32px);
+      flex-wrap: wrap;
+      margin-top: 2.5rem;
+    }
+    .cd-box {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--r);
+      padding: 24px 28px;
+      min-width: 90px;
+      backdrop-filter: blur(8px);
+      transition: var(--trans);
+    }
+    .cd-box:hover { border-color: rgba(201,169,110,0.3); transform: translateY(-4px); }
+    .cd-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .cd-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.25em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-top: 6px;
+    }
+    .birthday-msg {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-style: italic;
+      color: var(--gold);
+      margin-top: 1.5rem;
+    }
+
+    /* ============================================================
+       3. TIMELINE SECTION
+    ============================================================ */
+    #timeline {
+      padding: 100px 24px;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    .timeline-track {
+      position: relative;
+      margin-top: 60px;
+    }
+    /* Central line */
+    .timeline-track::before {
+      content: '';
+      position: absolute;
+      left: 50%;
+      top: 0; bottom: 0;
+      width: 1px;
+      background: linear-gradient(to bottom, transparent, var(--gold) 10%, var(--gold) 90%, transparent);
+      transform: translateX(-50%);
+      opacity: 0.3;
+    }
+
+    .tl-item {
+      display: flex;
+      align-items: flex-start;
+      margin-bottom: 64px;
+      position: relative;
+    }
+    .tl-item:nth-child(odd)  { flex-direction: row; }
+    .tl-item:nth-child(even) { flex-direction: row-reverse; }
+
+    .tl-content {
+      width: calc(50% - 40px);
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: var(--r);
+      padding: 24px 28px;
+      backdrop-filter: blur(6px);
+      transition: var(--trans);
+    }
+    .tl-content:hover { border-color: rgba(201,169,110,0.25); transform: translateY(-3px); box-shadow: var(--shadow); }
+
+    .tl-item:nth-child(odd)  .tl-content { margin-right: 40px; }
+    .tl-item:nth-child(even) .tl-content { margin-left:  40px; }
+
+    .tl-dot {
+      position: absolute;
+      left: 50%;
+      top: 24px;
+      transform: translateX(-50%);
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--gold);
+      box-shadow: 0 0 0 4px rgba(201,169,110,0.15);
+      z-index: 2;
+    }
+
+    .tl-year {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      font-weight: 300;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .tl-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.25rem;
+      font-weight: 400;
+      color: var(--ivory);
+      margin-top: 4px;
+    }
+    .tl-desc {
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 8px;
+      line-height: 1.65;
+    }
+    .tl-icon { font-size: 1.6rem; margin-bottom: 8px; }
+
+    /* Mobile timeline — single column */
+    @media (max-width: 640px) {
+      .timeline-track::before { left: 20px; }
+      .tl-item, .tl-item:nth-child(even) { flex-direction: column; padding-left: 52px; }
+      .tl-content, .tl-item:nth-child(odd) .tl-content, .tl-item:nth-child(even) .tl-content {
+        width: 100%; margin: 0;
+      }
+      .tl-dot { left: 20px; top: 20px; }
+    }
+
+    /* ============================================================
+       4. MEMORY GALLERY
+    ============================================================ */
+    #gallery {
+      padding: 100px 24px;
+      background: var(--bg2);
+      text-align: center;
+    }
+    .gallery-note {
+      font-size: 0.82rem;
+      color: var(--muted);
+      margin-top: 6px;
+      font-style: italic;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 16px;
+      max-width: 1100px;
+      margin: 3rem auto 0;
+    }
+    .gallery-item {
+      position: relative;
+      border-radius: var(--r);
+      overflow: hidden;
+      aspect-ratio: 4/3;
+      cursor: pointer;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+    }
+    .gallery-item img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      transition: transform 0.6s ease;
+      display: block;
+      filter: brightness(0.85) saturate(0.9);
+    }
+    .gallery-item:hover img { transform: scale(1.07); filter: brightness(1) saturate(1); }
+    .gallery-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(9,14,26,0.85) 0%, transparent 60%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      display: flex; align-items: flex-end; padding: 20px;
+    }
+    .gallery-item:hover .gallery-overlay { opacity: 1; }
+    .gallery-caption {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.05rem;
+      font-style: italic;
+      color: var(--ivory);
+    }
+
+    /* Lightbox */
+    #lightbox {
+      position: fixed; inset: 0;
+      background: rgba(9,14,26,0.97);
+      z-index: 2000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      backdrop-filter: blur(12px);
+    }
+    #lightbox.open { display: flex; }
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 85vh;
+      border-radius: var(--r);
+      box-shadow: 0 0 80px rgba(201,169,110,0.15);
+      object-fit: contain;
+    }
+    #lb-close {
+      position: absolute;
+      top: 24px; right: 28px;
+      font-size: 2rem;
+      color: var(--muted);
+      cursor: pointer;
+      background: none; border: none;
+      transition: color 0.2s;
+      line-height: 1;
+    }
+    #lb-close:hover { color: var(--gold); }
+    #lb-caption {
+      position: absolute;
+      bottom: 32px;
+      left: 50%; transform: translateX(-50%);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-style: italic;
+      color: var(--ivory);
+      text-align: center;
+    }
+
+    /* ============================================================
+       5. MESSAGE / LETTER SECTION
+    ============================================================ */
+    #message {
+      padding: 100px 24px;
+      max-width: 760px;
+      margin: 0 auto;
+    }
+    .letter-card {
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-bd);
+      border-radius: 20px;
+      padding: clamp(32px, 6vw, 64px);
+      position: relative;
+      overflow: hidden;
+      backdrop-filter: blur(8px);
+    }
+    /* Subtle decorative corner */
+    .letter-card::before {
+      content: '"';
+      position: absolute;
+      top: -10px; left: 24px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 10rem;
+      line-height: 1;
+      color: rgba(201,169,110,0.07);
+      pointer-events: none;
+    }
+    .letter-date {
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 24px;
+    }
+    .letter-body {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(1.15rem, 2.5vw, 1.45rem);
+      font-weight: 300;
+      line-height: 1.85;
+      color: var(--ivory);
+      font-style: italic;
+    }
+    .letter-body p + p { margin-top: 1.2em; }
+    .letter-sig {
+      margin-top: 2.5rem;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--gold);
+      font-style: italic;
+    }
+    .letter-heart {
+      font-size: 1.2rem;
+      margin-left: 8px;
+      animation: heartBeat 1.6s ease-in-out infinite;
+      display: inline-block;
+    }
+    @keyframes heartBeat {
+      0%, 100% { transform: scale(1); }
+      14%       { transform: scale(1.25); }
+      28%       { transform: scale(1); }
+      42%       { transform: scale(1.15); }
+      56%       { transform: scale(1); }
+    }
+
+    /* ============================================================
+       6. INTERACTIVE / SURPRISE SECTION
+    ============================================================ */
+    #surprise {
+      padding: 100px 24px;
+      background: var(--bg3);
+      text-align: center;
+    }
+    #surprise-btn {
+      margin-top: 2.5rem;
+      padding: 18px 44px;
+      background: transparent;
+      border: 1px solid var(--gold);
+      border-radius: 99px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-style: italic;
+      color: var(--gold);
+      cursor: pointer;
+      transition: all 0.4s;
+      letter-spacing: 0.03em;
+      position: relative;
+      overflow: hidden;
+    }
+    #surprise-btn::before {
+      content: '';
+      position: absolute; inset: 0;
+      background: var(--gold);
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.4s ease;
+      z-index: -1;
+    }
+    #surprise-btn:hover { color: var(--bg); }
+    #surprise-btn:hover::before { transform: scaleX(1); }
+
+    #surprise-msg {
+      display: none;
+      margin-top: 3rem;
+      animation: popIn 0.6s cubic-bezier(0.22,1,0.36,1) both;
+    }
+    #surprise-msg.show { display: block; }
+
+    @keyframes popIn {
+      from { opacity:0; transform:scale(0.8) translateY(20px); }
+      to   { opacity:1; transform:scale(1)   translateY(0); }
+    }
+
+    .surprise-card {
+      max-width: 540px;
+      margin: 0 auto;
+      background: var(--glass-bg);
+      border: 1px solid rgba(201,169,110,0.2);
+      border-radius: var(--r);
+      padding: 40px 36px;
+      backdrop-filter: blur(10px);
+    }
+    .surprise-emoji { font-size: 3.5rem; margin-bottom: 16px; }
+    .surprise-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.35rem;
+      font-style: italic;
+      line-height: 1.7;
+      color: var(--ivory);
+    }
+
+    /* Floating hearts container */
+    #hearts-container {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      pointer-events: none;
+      z-index: 3000;
+      overflow: hidden;
+    }
+    .floating-heart {
+      position: absolute;
+      bottom: -50px;
+      font-size: 1.5rem;
+      animation: floatUp 3.5s ease-in-out forwards;
+      pointer-events: none;
+    }
+    @keyframes floatUp {
+      0%   { opacity:0; transform:translateY(0) scale(0.5) rotate(-15deg); }
+      20%  { opacity:1; }
+      80%  { opacity:0.8; }
+      100% { opacity:0; transform:translateY(-110vh) scale(1.2) rotate(20deg); }
+    }
+
+    /* Canvas confetti */
+    #confetti-canvas {
+      position: fixed; inset: 0;
+      pointer-events: none;
+      z-index: 2999;
+    }
+
+    /* ============================================================
+       7. FOOTER
+    ============================================================ */
+    footer {
+      padding: 60px 24px;
+      text-align: center;
+      border-top: 1px solid var(--glass-bd);
+      background: var(--bg);
+    }
+    .footer-text {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      font-weight: 300;
+      font-style: italic;
+      color: var(--muted);
+    }
+    .footer-text .heart { color: #e87070; }
+    .footer-year {
+      font-size: 0.7rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: rgba(136,153,170,0.4);
+      margin-top: 12px;
+    }
+  </style>
+</head>
+<body>
+
+<!-- ======================================================
+     GLOBAL OVERLAY ELEMENTS
+====================================================== -->
+
+<!-- Floating hearts container -->
+<div id="hearts-container"></div>
+<!-- Confetti canvas -->
+<canvas id="confetti-canvas"></canvas>
+
+<!-- Music toggle (bottom right) -->
+<button id="music-toggle" title="Toggle background music">🎵</button>
+
+<!-- Hidden audio element — a gentle ambient track via data URL placeholder.
+     Replace the src with an actual audio file URL for real music. -->
+<audio id="bg-audio" loop>
+  <!-- Replace with: <source src="your-music-file.mp3" type="audio/mpeg"> -->
+</audio>
+
+<!-- ======================================================
+     LIGHTBOX
+====================================================== -->
+<div id="lightbox" role="dialog" aria-modal="true" aria-label="Image preview">
+  <button id="lb-close" aria-label="Close lightbox">&times;</button>
+  <img id="lb-img" src="" alt="Memory photo" />
+  <div id="lb-caption"></div>
+</div>
+
+
+<!-- ======================================================
+     1. HERO SECTION
+====================================================== -->
+<section id="hero">
+  <canvas id="particle-canvas"></canvas>
+
+  <div class="hero-content">
+    <div class="hero-badge">March 20, 1981 — 2026</div>
+    <h1 class="hero-title">
+      Happy 45th<br>Birthday, <span>Dad</span> ❤️
+    </h1>
+    <p class="hero-sub">A small digital world made just for you</p>
+    <div class="hero-year-ring">45</div>
+  </div>
+
+  <div class="scroll-indicator" onclick="document.getElementById('countdown').scrollIntoView({behavior:'smooth'})">
+    <span>Scroll</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     2. COUNTDOWN SECTION
+====================================================== -->
+<section id="countdown">
+  <div class="reveal">
+    <p class="section-label">The Special Day</p>
+    <h2 class="section-title">March 20, 2026</h2>
+    <div class="divider"></div>
+  </div>
+
+  <!-- Will be filled by JS -->
+  <div id="cd-content" class="reveal" style="transition-delay:0.2s"></div>
+</section>
+
+
+<!-- ======================================================
+     3. TIMELINE
+====================================================== -->
+<section id="timeline">
+  <div class="center reveal">
+    <p class="section-label">Life's Beautiful Journey</p>
+    <h2 class="section-title">45 Years of You</h2>
+    <div class="divider"></div>
+    <p style="color:var(--muted); font-size:0.9rem; max-width:480px; margin:0 auto;">
+      Every chapter of your life has been a gift to those around you.
+    </p>
+  </div>
+
+  <div class="timeline-track">
+
+    <div class="tl-item">
+      <div class="tl-content reveal-left">
+        <div class="tl-icon">🌟</div>
+        <div class="tl-year">1981</div>
+        <div class="tl-title">ஒரு நட்சத்திரம் பிறந்தது</div>
+        <p class="tl-desc">1981 மார்ச் காலையில், உலகம் சத்தமில்லாமல் மிகவும் அழகானதாக மாறியது. நீங்கள் வந்தீர்கள் — சிறியதாக, புதியதாக, யாரும் கற்பனை செய்யாத எதிர்காலத்துடன்.</p>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content reveal-right">
+        <div class="tl-icon">🧒</div>
+        <div class="tl-year">1985–1995</div>
+        <div class="tl-title">தங்க குழந்தைப் பருவம்</div>
+        <p class="tl-desc">ஆர்வமான கண்கள். சுறுசுறுப்பான நாட்கள். முடிவில்லாத கோடைகாலங்கள். கனவு காண்பதும், விளையாடுவதும், வாழ்வின் எளிமையான விஷயங்களை நேசிப்பதும் என்னவென்று நீங்கள் கற்றீர்கள்.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-content reveal-left">
+        <div class="tl-icon">🎓</div>
+        <div class="tl-year">1996–2002</div>
+        <div class="tl-title">வளர்ச்சியின் ஆண்டுகள்</div>
+        <p class="tl-desc">படித்தீர்கள், உங்களை நீங்களே கண்டுபிடித்தீர்கள், ஆனவராக உருவெடுப்பதற்கான அடித்தளத்தை அமைதியாக கட்டினீர்கள் — ஒழுக்கமான, ஞானமுள்ள, அன்பான மனிதராக.</p>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content reveal-right">
+        <div class="tl-icon">💼</div>
+        <div class="tl-year">2003–2010</div>
+        <div class="tl-title">ஒரு வாழ்க்கையை கட்டமைத்தல்</div>
+        <p class="tl-desc">தொழில் தொடங்கியது. பொறுப்புகள் வளர்ந்தன. அங்கீகாரம் கோராமல் அமைதியான உறுதியோடு உழைத்தீர்கள் — தினமும் உங்கள் சிறந்ததை மட்டுமே கொடுத்தீர்கள்.</p>
+      </div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-content reveal-left">
+        <div class="tl-icon">🏡</div>
+        <div class="tl-year">2010–2020</div>
+        <div class="tl-title">குடும்பமே முதலிடம்</div>
+        <p class="tl-desc">சுவர்களும் கூரையும் மட்டுமல்லாமல், அன்பும் சிரிப்பும் நிபந்தனையற்ற அன்பும் கொண்டு ஒரு இல்லத்தை உருவாக்கினீர்கள். இந்த உலகில் உண்மையில் முக்கியமானது என்னவென்று எங்களுக்கு கற்றுக்கொடுத்தீர்கள்.</p>
+      </div>
+      <div class="tl-dot"></div>
+    </div>
+
+    <div class="tl-item">
+      <div class="tl-dot"></div>
+      <div class="tl-content reveal-right">
+        <div class="tl-icon">✨</div>
+        <div class="tl-year">2026</div>
+        <div class="tl-title">45 & அற்புதமானவர்</div>
+        <p class="tl-desc">இன்று உங்கள் அற்புதமான வாழ்க்கையின் 45 ஆண்டுகளை கொண்டாடுகிறோம். நீங்கள் எங்கள் நங்கூரம், எங்கள் உத்வேகம், எங்கள் மிகப்பெரிய ஆசீர்வாதம். இனி வரும் ஒவ்வொரு ஆண்டும் சிறப்பாக அமையட்டும்.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======================================================
+     4. MEMORY GALLERY
+====================================================== -->
+<section id="gallery">
+  <div class="reveal">
+    <p class="section-label">Treasured Moments</p>
+    <h2 class="section-title">Memory Gallery</h2>
+    <div class="divider"></div>
+    <p class="gallery-note">Replace placeholder images with your real family photos 📷</p>
+  </div>
+
+  <div class="gallery-grid reveal" style="transition-delay:0.3s">
+
+    <div class="gallery-item" data-caption="The beginning of everything — 1981" data-src="">
+      <img src="https://images.unsplash.com/photo-1506794778202-cad84cf45f1d?w=600&q=80" alt="Young father" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">The Early Years</span></div>
+    </div>
+
+    <div class="gallery-item" data-caption="Summers we'll never forget" data-src="">
+      <img src="https://images.unsplash.com/photo-1511895426328-dc8714191011?w=600&q=80" alt="Family moments" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">Summer Memories</span></div>
+    </div>
+
+    <div class="gallery-item" data-caption="You and your beautiful smile" data-src="">
+      <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=600&q=80" alt="Portrait" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">Your Smile</span></div>
+    </div>
+
+    <div class="gallery-item" data-caption="Adventures together" data-src="">
+      <img src="https://images.unsplash.com/photo-1474552226712-ac0f0961a954?w=600&q=80" alt="Travel" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">Adventures</span></div>
+    </div>
+
+    <div class="gallery-item" data-caption="Quiet evenings, loud laughter" data-src="">
+      <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=600&q=80" alt="Family gathering" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">Family Evenings</span></div>
+    </div>
+
+    <div class="gallery-item" data-caption="Your strength inspires us all" data-src="">
+      <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=600&q=80" alt="Strong portrait" loading="lazy" />
+      <div class="gallery-overlay"><span class="gallery-caption">Our Strength</span></div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ======================================================
+     5. LETTER / MESSAGE SECTION
+====================================================== -->
+<section id="message">
+  <div class="center reveal">
+    <p class="section-label">From the Heart</p>
+    <h2 class="section-title">A Letter to You</h2>
+    <div class="divider"></div>
+  </div>
+
+  <div class="letter-card reveal" style="transition-delay:0.3s; margin-top:3rem;">
+    <p class="letter-date">மார்ச் 20, 2026</p>
+    <div class="letter-body">
+      <p>அன்புள்ள அப்பா,</p>
+      <p>நீங்கள் எனக்கு என்னவென்று விவரிக்க எந்த மொழியிலும் போதுமான வார்த்தைகள் இல்லை. நீங்கள் எனது முதல் இல்லம், எனது முதல் ஆசிரியர், எனது மிகவும் நிலையான சக்தியின் ஆதாரம். வாழ்க்கையை எப்படி வாழ வேண்டும் என்று நீங்கள் எனக்கு கற்றுக்கொடுத்தது — வார்த்தைகளால் அல்ல, உங்கள் வாழ்க்கை முறையால் — இன்று நான் யாரென்பதை வடிவமைத்துள்ளது.</p>
+      <p>நீங்கள் உழைப்பதை பார்த்தேன், கவலைப்படுவதை பார்த்தேன், இந்த குடும்பத்தின் சுமையை அமைதியாக சுமப்பதை பார்த்தேன் — எங்களை உணரவிடாமல். கஷ்டமான விஷயங்களை நீங்கள் எளிதாக செய்தீர்கள், ஏனென்றால் எங்கள் மீதுள்ள உங்கள் அன்பு அதை மதிப்புள்ளதாக்கியது.</p>
+      <p>கண்ணுக்கு தெரியாத ஒவ்வொரு தியாகத்திற்கும் நன்றி. நாங்கள் சிறந்த காலைகளை பெற நீங்கள் செலவிட்ட ஒவ்வொரு இரவிற்கும். பெரிய தருணங்களில் அல்ல, அமைதியான தருணங்களில் தான் குணம் உருவாகும் என்று கற்றுக்கொடுத்ததற்கும்.</p>
+      <p>இந்த அழகான பிறந்தநாளில் — உங்கள் 45வது — நான் உங்களை பார்க்கிறேன் என்று தெரிந்துகொள்ளுங்கள். எப்போதும் பார்த்தேன். உங்களை என் அப்பா என்று அழைக்க கிடைத்ததற்கு எல்லையற்ற நன்றி.</p>
+      <p>பிறந்த நாள் வாழ்த்துக்கள், அப்பா. இந்த வாழ்க்கை தரக்கூடிய ஒவ்வொரு நல்லதும் உங்களுக்கு கிடைக்கட்டும்.</p>
+    </div>
+    <div class="letter-sig">
+      என் முழு அன்புடன் <span class="letter-heart">❤️</span>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     6. SURPRISE / INTERACTIVE SECTION
+====================================================== -->
+<section id="surprise">
+  <div class="reveal">
+    <p class="section-label">Something Special</p>
+    <h2 class="section-title">A Little Surprise</h2>
+    <div class="divider"></div>
+    <p style="color:var(--muted); font-size:0.9rem;">One more thing, Dad…</p>
+  </div>
+
+  <div class="reveal" style="transition-delay:0.2s">
+    <button id="surprise-btn">Click for a Surprise 🎁</button>
+  </div>
+
+  <div id="surprise-msg" class="reveal">
+    <div class="surprise-card">
+      <div class="surprise-emoji">🎂</div>
+      <div class="surprise-text">
+        "The greatest gift I ever received<br>
+        wasn't anything wrapped in paper —<br>
+        it was you, Dad.<br>
+        Every day with you is the real celebration."
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ======================================================
+     7. FOOTER
+====================================================== -->
+<footer>
+  <p class="footer-text">
+    Made with <span class="heart">❤️</span> by your child — for the most wonderful dad in the world.
+  </p>
+  <p class="footer-year">March 20, 2026 &nbsp;·&nbsp; 45 Years of Love</p>
+</footer>
+
+
+<!-- ======================================================
+     JAVASCRIPT
+====================================================== -->
+<script>
+/* ============================================================
+   PARTICLE CANVAS (Hero Background)
+============================================================ */
+(function () {
+  const canvas = document.getElementById('particle-canvas');
+  const ctx = canvas.getContext('2d');
+  let W, H, particles = [];
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  function Particle() {
+    this.reset();
+  }
+  Particle.prototype.reset = function () {
+    this.x  = Math.random() * W;
+    this.y  = Math.random() * H;
+    this.r  = Math.random() * 1.5 + 0.3;
+    this.vx = (Math.random() - 0.5) * 0.2;
+    this.vy = (Math.random() - 0.5) * 0.15;
+    this.a  = Math.random() * 0.5 + 0.1;
+    this.da = (Math.random() - 0.5) * 0.005;
+  };
+  Particle.prototype.update = function () {
+    this.x += this.vx;
+    this.y += this.vy;
+    this.a += this.da;
+    if (this.a < 0.05 || this.a > 0.65) this.da *= -1;
+    if (this.x < -5 || this.x > W + 5 || this.y < -5 || this.y > H + 5) this.reset();
+  };
+
+  for (let i = 0; i < 120; i++) particles.push(new Particle());
+
+  function draw() {
+    ctx.clearRect(0, 0, W, H);
+    particles.forEach(p => {
+      p.update();
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201, 169, 110, ${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+
+
+/* ============================================================
+   SCROLL REVEAL
+============================================================ */
+(function () {
+  const revealEls = document.querySelectorAll('.reveal, .reveal-left, .reveal-right');
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach((e, idx) => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        io.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  revealEls.forEach(el => io.observe(el));
+})();
+
+
+/* ============================================================
+   COUNTDOWN TIMER
+============================================================ */
+(function () {
+  const container = document.getElementById('cd-content');
+  const target = new Date('2026-03-20T00:00:00');
+
+  function pad(n) { return String(n).padStart(2, '0'); }
+
+  function tick() {
+    const now  = new Date();
+    const diff = target - now;
+
+    if (diff <= 0) {
+      container.innerHTML = `<p class="birthday-msg">🎉 Happy Birthday, Dad! Hope you had an amazing day ❤️</p>`;
+      return;
+    }
+
+    const days    = Math.floor(diff / 86400000);
+    const hours   = Math.floor((diff % 86400000) / 3600000);
+    const minutes = Math.floor((diff % 3600000) / 60000);
+    const seconds = Math.floor((diff % 60000) / 1000);
+
+    container.innerHTML = `
+      <div class="countdown-grid">
+        <div class="cd-box"><div class="cd-num" id="cd-d">${pad(days)}</div><div class="cd-label">Days</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-h">${pad(hours)}</div><div class="cd-label">Hours</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-m">${pad(minutes)}</div><div class="cd-label">Minutes</div></div>
+        <div class="cd-box"><div class="cd-num" id="cd-s">${pad(seconds)}</div><div class="cd-label">Seconds</div></div>
+      </div>
+    `;
+  }
+
+  tick();
+  setInterval(tick, 1000);
+})();
+
+
+/* ============================================================
+   GALLERY LIGHTBOX
+============================================================ */
+(function () {
+  const lightbox  = document.getElementById('lightbox');
+  const lbImg     = document.getElementById('lb-img');
+  const lbCaption = document.getElementById('lb-caption');
+  const lbClose   = document.getElementById('lb-close');
+
+  document.querySelectorAll('.gallery-item').forEach(item => {
+    item.addEventListener('click', () => {
+      const img = item.querySelector('img');
+      lbImg.src = img.src;
+      lbCaption.textContent = item.dataset.caption || '';
+      lightbox.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    });
+  });
+
+  function close() {
+    lightbox.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  lbClose.addEventListener('click', close);
+  lightbox.addEventListener('click', e => { if (e.target === lightbox) close(); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+})();
+
+
+/* ============================================================
+   SURPRISE BUTTON — Confetti + Floating Hearts
+============================================================ */
+(function () {
+  const btn    = document.getElementById('surprise-btn');
+  const msgEl  = document.getElementById('surprise-msg');
+  const hCont  = document.getElementById('hearts-container');
+  const canvas = document.getElementById('confetti-canvas');
+  const ctx    = canvas.getContext('2d');
+
+  canvas.width  = window.innerWidth;
+  canvas.height = window.innerHeight;
+  window.addEventListener('resize', () => {
+    canvas.width  = window.innerWidth;
+    canvas.height = window.innerHeight;
+  });
+
+  let confettiPieces = [];
+  let confettiRunning = false;
+
+  const COLORS = ['#c9a96e', '#e8c97e', '#f5f0e8', '#6ea3c9', '#c96e8e'];
+
+  function spawnConfetti() {
+    for (let i = 0; i < 180; i++) {
+      confettiPieces.push({
+        x: Math.random() * canvas.width,
+        y: Math.random() * -canvas.height * 0.5,
+        w: Math.random() * 10 + 5,
+        h: Math.random() * 6 + 3,
+        color: COLORS[Math.floor(Math.random() * COLORS.length)],
+        vx: (Math.random() - 0.5) * 3,
+        vy: Math.random() * 3 + 1.5,
+        rot: Math.random() * 360,
+        rotV: (Math.random() - 0.5) * 6,
+        opacity: 1
+      });
+    }
+  }
+
+  function drawConfetti() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    confettiPieces = confettiPieces.filter(p => p.opacity > 0.05);
+    confettiPieces.forEach(p => {
+      p.x   += p.vx;
+      p.y   += p.vy;
+      p.rot += p.rotV;
+      if (p.y > canvas.height * 0.7) p.opacity -= 0.025;
+      ctx.save();
+      ctx.translate(p.x, p.y);
+      ctx.rotate(p.rot * Math.PI / 180);
+      ctx.globalAlpha = p.opacity;
+      ctx.fillStyle = p.color;
+      ctx.fillRect(-p.w / 2, -p.h / 2, p.w, p.h);
+      ctx.restore();
+    });
+    if (confettiPieces.length > 0) requestAnimationFrame(drawConfetti);
+    else { confettiRunning = false; ctx.clearRect(0, 0, canvas.width, canvas.height); }
+  }
+
+  function launchHearts() {
+    const emojis = ['❤️','🧡','💛','💚','💙','💜','🤍','✨','🌸','🎉'];
+    for (let i = 0; i < 20; i++) {
+      setTimeout(() => {
+        const h = document.createElement('div');
+        h.className = 'floating-heart';
+        h.textContent = emojis[Math.floor(Math.random() * emojis.length)];
+        h.style.left  = Math.random() * 100 + 'vw';
+        h.style.fontSize = (Math.random() * 1.5 + 0.8) + 'rem';
+        h.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+        hCont.appendChild(h);
+        setTimeout(() => h.remove(), 5000);
+      }, i * 100);
+    }
+  }
+
+  btn.addEventListener('click', () => {
+    msgEl.classList.toggle('show');
+
+    if (msgEl.classList.contains('show')) {
+      btn.textContent = 'You are loved, Dad 💛';
+
+      spawnConfetti();
+      if (!confettiRunning) {
+        confettiRunning = true;
+        drawConfetti();
+      }
+
+      launchHearts();
+    } else {
+      btn.textContent = 'Click for a Surprise 🎁';
+    }
+  });
+})();
+
+
+/* ============================================================
+   MUSIC TOGGLE
+   To use real music: add an <source> inside #bg-audio with your mp3 URL
+============================================================ */
+(function () {
+  const btn   = document.getElementById('music-toggle');
+  const audio = document.getElementById('bg-audio');
+  let playing = false;
+
+  btn.addEventListener('click', () => {
+    if (!playing) {
+      audio.play().then(() => {
+        playing = true;
+        btn.textContent = '🔇';
+        btn.title = 'Mute music';
+      }).catch(() => {
+        btn.title = 'No audio source — add an MP3 to enable music';
+      });
+    } else {
+      audio.pause();
+      playing = false;
+      btn.textContent = '🎵';
+      btn.title = 'Play background music';
+    }
+  });
+})();
+</script>
+
+</body>
+</html>
