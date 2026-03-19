@@ -342,6 +342,11 @@
     .tl-content {
       width: calc(50% - 40px);
       background: var(--glass-bg);
+      background-image: url("bg.jpg");
+      background-size: cover;        
+      background-position: center; 
+      background-repeat: no-repeat;  
+      opacity: 0.2;
       border: 1px solid var(--glass-bd);
       border-radius: var(--r);
       padding: 24px 28px;
@@ -696,7 +701,7 @@
 <!-- Hidden audio element — a gentle ambient track via data URL placeholder.
      Replace the src with an actual audio file URL for real music. -->
 <audio id="bg-audio" loop>
-  <!-- Replace with: <source src="your-music-file.mp3" type="audio/mpeg"> -->
+  <source src="song.mp3" type="audio/mpeg">
 </audio>
 
 <!-- ======================================================
@@ -761,7 +766,7 @@
 
   <div class="timeline-track">
 
-    <div class="tl-item">
+    <div class="tl-item" >
       <div class="tl-content reveal-left">
         <div class="tl-icon">🌟</div>
         <div class="tl-year">1981</div>
@@ -1188,7 +1193,7 @@
     if (!playing) {
       audio.play().then(() => {
         playing = true;
-        btn.textContent = '🔇';
+        btn.textContent = '🔊';
         btn.title = 'Mute music';
       }).catch(() => {
         btn.title = 'No audio source — add an MP3 to enable music';
@@ -1196,7 +1201,7 @@
     } else {
       audio.pause();
       playing = false;
-      btn.textContent = '🎵';
+      btn.textContent = '🔇';
       btn.title = 'Play background music';
     }
   });
